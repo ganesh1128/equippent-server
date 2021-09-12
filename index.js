@@ -3,7 +3,8 @@ const app = express();
 const cors = require("cors");
 const mongodb = require("mongodb");
 const mongoClient = mongodb.MongoClient;
-const url = "mongodb://localhost:27017/hackathon";
+const url = "mongodb://localhost:27017";
+const PORT = process.env.PORT || 3000
 
 app.use(
   cors({
@@ -57,6 +58,6 @@ app.post("/create-product", async function (req, res) {
   }
 });
 
-app.listen(3000, function () {
-  console.log("listening to 3000");
+app.listen(PORT , function () {
+  console.log(`listening to ${PORT}`);
 });
