@@ -58,6 +58,32 @@ app.post("/create-product", async function (req, res) {
   }
 });
 
+app.delete("/delete-product/:id", async function (req, res) {
+  try {
+      //Connect the database
+  let client = await mongoClient.connect(url);
+
+  //select the DB
+  let db = client.db("hackathon");
+
+  //select the collection and perform the action
+  let data = await db.collection("products")
+             .findOneAndDelete({_id : mongodb.ObjectId(req.params.id)})
+   //close the connection
+   await client.close();
+   res.json({
+      message: "Task Deleted",
+    });
+
+  } catch (error) {
+      res.status(500).json({
+          message: "Something went wrong",
+        });
+      
+  }
+});
+
+
 app.listen(PORT , function () {
   console.log(`listening to ${PORT}`);
 });
