@@ -5,6 +5,7 @@ const mongodb = require("mongodb");
 const mongoClient = mongodb.MongoClient;
 const url = "mongodb+srv://ganesh:admin123@cluster0.ckdmc.mongodb.net?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 3000
+require("dotenv").config();
 
 app.use(
   cors({
@@ -13,6 +14,9 @@ app.use(
 );
 
 app.use(express.json());
+
+//payment routes
+app.use("/payment",require("./payment"));
 
 app.get("/all-products", async function (req, res) {
   try {
